@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q3.2 Verhaltensbiologie - Lernhilfe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --primary: #2563eb;
+    --primary-light: #dbeafe;
+    --secondary: #7c3aed;
+    --secondary-light: #ede9fe;
+    --accent: #059669;
+    --accent-light: #d1fae5;
+    --warning: #d97706;
+    --warning-light: #fef3c7;
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --radius: 16px;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0fdf4 100%);
+    color: var(--gray-800);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 12px 0;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .nav-link {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--gray-700);
+    background: var(--gray-100);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-link:hover { background: var(--primary-light); color: var(--primary); }
+  .nav-link.lk { border: 2px solid var(--secondary); background: var(--secondary-light); color: var(--secondary); }
+
+  /* Hero */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero p { font-size: 1.1rem; color: var(--gray-500); max-width: 600px; margin: 0 auto; }
+  .level-badges { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
+  .badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .badge-gk { background: var(--primary-light); color: var(--primary); }
+  .badge-lk { background: var(--secondary-light); color: var(--secondary); }
+
+  /* Main Container */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* Topic Sections */
+  .topic {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 32px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+    transition: box-shadow 0.3s;
+  }
+  .topic:hover { box-shadow: var(--shadow-lg); }
+
+  .topic-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .topic-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .topic-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+  .topic-header .subtitle {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    margin-top: 2px;
+  }
+
+  .topic-body { padding: 28px 32px; }
+
+  /* Visual Diagrams */
+  .diagram {
+    background: var(--gray-50);
+    border: 2px dashed var(--gray-200);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0 24px;
+    text-align: center;
+  }
+  .diagram-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-500);
+    margin-bottom: 16px;
+  }
+
+  /* Flow Diagrams */
+  .flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; padding: 10px 0; }
+  .flow-box {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    min-width: 120px;
+    position: relative;
+  }
+  .flow-arrow {
+    font-size: 24px;
+    color: var(--gray-400);
+    margin: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* Schema boxes */
+  .schema {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .schema-card {
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .schema-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+  .schema-card .icon { font-size: 2rem; margin-bottom: 8px; }
+  .schema-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .schema-card p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.5; }
+
+  /* Key Terms */
+  .terms { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .term {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .term.green { background: var(--accent-light); color: var(--accent); }
+  .term.purple { background: var(--secondary-light); color: var(--secondary); }
+  .term.orange { background: var(--warning-light); color: var(--warning); }
+
+  /* Explanation Text */
+  .explain {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+  }
+  .explain strong { color: var(--gray-900); }
+  .highlight {
+    background: linear-gradient(120deg, #fef08a 0%, #fde68a 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* Examples */
+  .example {
+    background: linear-gradient(135deg, #fefce8, #fef9c3);
+    border-left: 4px solid var(--warning);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .example::before {
+    content: "Beispiel";
+    display: block;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--warning);
+    margin-bottom: 6px;
+  }
+
+  /* Comparison tables */
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    font-size: 0.9rem;
+    border: 1px solid var(--gray-200);
+  }
+  .compare-table th {
+    background: var(--gray-800);
+    color: white;
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .compare-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--gray-50); }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* Q&A Cards */
+  .qa-section {
+    margin-top: 28px;
+    border-top: 2px solid var(--gray-100);
+    padding-top: 24px;
+  }
+  .qa-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qa-card {
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .qa-card:hover { border-color: var(--primary); }
+
+  .qa-question {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    background: white;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .qa-question:hover { background: var(--gray-50); }
+  .qa-question .q-icon {
+    background: var(--primary);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .qa-question .toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: transform 0.3s, background 0.3s;
+    flex-shrink: 0;
+    color: var(--gray-500);
+  }
+  .qa-card.open .qa-question .toggle {
+    transform: rotate(180deg);
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: var(--accent-light);
+  }
+  .qa-card.open .qa-answer { max-height: 500px; }
+  .qa-answer-inner {
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+    border-top: 1px solid rgba(5,150,105,0.2);
+  }
+  .qa-answer-inner strong { color: var(--accent); }
+
+  /* LK Badge */
+  .lk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+
+  /* Visual Process Diagrams */
+  .process-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .process-step {
+    flex: 1;
+    min-width: 140px;
+    max-width: 220px;
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .process-step .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .process-step h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+  .process-step p { font-size: 0.78rem; color: var(--gray-500); }
+  .process-step::after {
+    content: ">";
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--gray-300);
+    font-weight: 700;
+  }
+  .process-step:last-child::after { display: none; }
+
+  /* Tinbergen Box */
+  .tinbergen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .tinbergen-box {
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid;
+  }
+  .tinbergen-box h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .tinbergen-box p { font-size: 0.85rem; line-height: 1.6; }
+  .tinbergen-box ul { font-size: 0.85rem; line-height: 1.8; padding-left: 18px; }
+
+  /* Cost-Benefit */
+  .cost-benefit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 0;
+  }
+  .cost-col, .benefit-col {
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .cost-col { background: var(--danger-light); border: 2px solid #fca5a5; }
+  .benefit-col { background: var(--accent-light); border: 2px solid #6ee7b7; }
+  .cost-col h4, .benefit-col h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+  .cost-col ul, .benefit-col ul { font-size: 0.85rem; line-height: 1.8; padding-left: 18px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tinbergen-grid, .cost-benefit { grid-template-columns: 1fr; }
+    .topic-header { padding: 20px; }
+    .topic-body { padding: 20px; }
+    .flow { gap: 4px; }
+    .flow-box { min-width: 90px; padding: 10px 12px; font-size: 0.8rem; }
+    .nav-inner { gap: 6px; }
+    .nav-link { font-size: 11px; padding: 5px 10px; }
+    .schema { grid-template-columns: 1fr; }
+  }
+
+  /* Print */
+  @media print {
+    .nav { display: none; }
+    .topic { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .qa-answer { max-height: none !important; }
+    body { background: white; }
+  }
+
+  /* Animation on scroll */
+  .topic { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s forwards; }
+  .topic:nth-child(1) { animation-delay: 0.05s; }
+  .topic:nth-child(2) { animation-delay: 0.1s; }
+  .topic:nth-child(3) { animation-delay: 0.15s; }
+  .topic:nth-child(4) { animation-delay: 0.2s; }
+  .topic:nth-child(5) { animation-delay: 0.25s; }
+  .topic:nth-child(6) { animation-delay: 0.3s; }
+  .topic:nth-child(7) { animation-delay: 0.35s; }
+  .topic:nth-child(8) { animation-delay: 0.4s; }
+  .topic:nth-child(9) { animation-delay: 0.45s; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-link" href="#attrappenversuche">Attrappenversuche</a>
+    <a class="nav-link" href="#ursachen">Proximate/Ultimate</a>
+    <a class="nav-link" href="#angeboren">Angeborenes Verhalten</a>
+    <a class="nav-link" href="#endogen">Endogene Faktoren</a>
+    <a class="nav-link" href="#exogen">Schluesselreiz</a>
+    <a class="nav-link" href="#lernformen">Lernformen</a>
+    <a class="nav-link" href="#oekologie">Verhaltensoekologie</a>
+    <a class="nav-link lk" href="#soziobiologie">Soziobiologie (LK)</a>
+    <a class="nav-link lk" href="#kognition">Kognition (LK)</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <h1>Verhaltensbiologie</h1>
+  <p>Q3.2 - Alle Themen visuell erklaert mit Fragen &amp; Antworten</p>
+  <div class="level-badges">
+    <span class="badge badge-gk">GK + LK - Grundlegendes Niveau</span>
+    <span class="badge badge-lk">Nur LK - Erhoehtes Niveau</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ==================== 1. ATTRAPPENVERSUCHE ==================== -->
+<section class="topic" id="attrappenversuche">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--primary-light); color: var(--primary);">🎭</div>
+    <div>
+      <h2>Attrappenversuche</h2>
+      <div class="subtitle">Vereinfachte Modelle zum Testen von Verhaltensausloesern</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      Bei einem <strong>Attrappenversuch</strong> werden <span class="highlight">kuenstliche Nachbildungen</span> (Attrappen) verwendet, um herauszufinden, welche <strong>spezifischen Merkmale</strong> eines Reizes ein bestimmtes Verhalten ausloesen. Dabei wird die Attrappe schrittweise veraendert - Merkmale werden <strong>weggelassen, uebertrieben oder veraendert</strong>.
+    </p>
+
+    <div class="diagram">
+      <div class="diagram-title">Prinzip des Attrappenversuchs</div>
+      <div class="flow">
+        <div class="flow-box" style="background: var(--primary-light); color: var(--primary);">Natuerliches<br>Objekt</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--warning-light); color: var(--warning);">Attrappe<br>(vereinfacht)</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--accent-light); color: var(--accent);">Reaktion?<br>Ja / Nein</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--secondary-light); color: var(--secondary);">Schluesselmerkmal<br>identifiziert</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Stichling-Experiment (Tinbergen):</strong> Maennliche Stichlinge greifen selbst grobe Attrappen mit <strong>rotem Bauch</strong> an, ignorieren aber naturgetreue Modelle ohne roten Bauch. &#8594; Der <strong>rote Bauch</strong> ist der Schluesselreiz!
+    </div>
+    <div class="example">
+      <strong>Silbermoewen-Kueken:</strong> Picken auf rote Punkte an einem Stock - sogar staerker als auf den echten Schnabel. &#8594; <span class="highlight">Ueberoptimale Attrappe</span> = staerkere Reaktion als das Original.
+    </div>
+
+    <div class="terms">
+      <span class="term">Attrappe</span>
+      <span class="term green">Schluesselreiz</span>
+      <span class="term purple">Ueberoptimale Attrappe</span>
+      <span class="term orange">Merkmalsreduktion</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist das Ziel eines Attrappenversuchs?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Das Ziel ist es, durch <strong>systematische Vereinfachung</strong> herauszufinden, welches <strong>spezifische Merkmal</strong> (= Schluesselreiz) eines Objekts eine bestimmte Verhaltensreaktion ausloest. Man entfernt oder veraendert einzelne Merkmale und beobachtet, ob die Reaktion erhalten bleibt oder ausbleibt.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist eine ueberoptimale Attrappe?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Eine Attrappe, bei der der <strong>Schluesselreiz uebertrieben</strong> dargestellt wird (z.B. extra grosser roter Punkt). Sie loest eine <strong>staerkere Reaktion</strong> aus als das natuerliche Objekt. Dies zeigt, dass das Tier rein auf den Reiz reagiert, nicht auf das Gesamtbild.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Warum greift ein Stichling eine grobe rote Attrappe an, aber kein naturgetreues Modell ohne Rot?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Weil der <strong>rote Bauch der Schluesselreiz</strong> ist, der das Aggressionsverhalten ausloest. Die Gesamtform spielt eine untergeordnete Rolle. Der <strong>angeborene Ausloesemechanismus (AAM)</strong> reagiert spezifisch auf die Farbe Rot am Bauch, nicht auf die realistische Fischgestalt.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2. PROXIMATE UND ULTIMATE URSACHEN ==================== -->
+<section class="topic" id="ursachen">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--accent-light); color: var(--accent);">🔍</div>
+    <div>
+      <h2>Proximate &amp; Ultimate Ursachen</h2>
+      <div class="subtitle">Die zwei grossen "Warum?"-Fragen der Verhaltensbiologie</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      Jedes Verhalten kann aus <strong>zwei Perspektiven</strong> erklaert werden. Die <span class="highlight">proximaten Ursachen</span> fragen nach dem <strong>"Wie?"</strong> (Mechanismen), die <span class="highlight">ultimaten Ursachen</span> nach dem <strong>"Wozu?"</strong> (evolutionaerer Nutzen).
+    </p>
+
+    <div class="tinbergen-grid">
+      <div class="tinbergen-box" style="background: var(--primary-light); border-color: #93c5fd;">
+        <h4 style="color: var(--primary);">&#9881; Proximate Ursachen (Wie?)</h4>
+        <p><strong>Mechanismen, die Verhalten unmittelbar steuern:</strong></p>
+        <ul>
+          <li><strong>Exogen</strong> = aeussere Reize (Licht, Temperatur, Schluesselreize)</li>
+          <li><strong>Endogen</strong> = innere Faktoren (Hormone, Nervensystem, Motivation)</li>
+        </ul>
+        <div class="example" style="margin-top: 12px;">
+          Warum singt ein Vogel? &#8594; Testosteron (endogen) + Tageslichtlaenge (exogen)
+        </div>
+      </div>
+      <div class="tinbergen-box" style="background: var(--secondary-light); border-color: #c4b5fd;">
+        <h4 style="color: var(--secondary);">&#127793; Ultimate Ursachen (Wozu?)</h4>
+        <p><strong>Anpassungswert fuer die Fitnessmaximierung:</strong></p>
+        <ul>
+          <li>Welchen <strong>Selektionsvorteil</strong> bietet das Verhalten?</li>
+          <li>Wie steigert es die <strong>Fitness</strong> (Fortpflanzungserfolg)?</li>
+          <li>Wie hat sich das Verhalten <strong>evolutionaer</strong> entwickelt?</li>
+        </ul>
+        <div class="example" style="margin-top: 12px;">
+          Warum singt ein Vogel? &#8594; Zur Revierverteidigung und Partnerwerbung = mehr Nachkommen
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Zusammenspiel: Ein Verhalten - Zwei Erklaerungsebenen</div>
+      <div class="flow">
+        <div class="flow-box" style="background: var(--primary-light); color: var(--primary);">Proximate Ursache<br><small>Mechanismus</small></div>
+        <span class="flow-arrow">&#8592;</span>
+        <div class="flow-box" style="background: var(--warning-light); color: var(--warning); font-size: 1.1rem; font-weight: 700;">VERHALTEN</div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-box" style="background: var(--secondary-light); color: var(--secondary);">Ultimate Ursache<br><small>Funktion</small></div>
+      </div>
+    </div>
+
+    <div class="terms">
+      <span class="term">Proximate Ursache</span>
+      <span class="term purple">Ultimate Ursache</span>
+      <span class="term green">Fitness</span>
+      <span class="term orange">Fitnessmaximierung</span>
+      <span class="term">Exogen</span>
+      <span class="term">Endogen</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist der Unterschied zwischen proximat und ultimat?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Proximat</strong> = "Wie funktioniert es?" &#8594; beschreibt die <strong>unmittelbaren Mechanismen</strong> (Hormone, Reize, Nervenimpulse).<br>
+          <strong>Ultimat</strong> = "Warum gibt es das?" &#8594; beschreibt den <strong>evolutionaeren Anpassungswert</strong> (Selektionsvorteil, Fitnessmaximierung).
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Erklaere den Vogelgesang proximat UND ultimat.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Proximat:</strong> Steigender Testosteronspiegel (endogen) im Fruehling, ausgeloest durch zunehmende Tageslichtlaenge (exogen), aktiviert das Gesangszentrum im Gehirn.<br>
+          <strong>Ultimat:</strong> Gesang dient der <strong>Revierverteidigung</strong> und <strong>Partnerwerbung</strong>, was den Fortpflanzungserfolg steigert und somit die <strong>Fitness maximiert</strong>.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was bedeutet "Fitness" in der Verhaltensbiologie?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Fitness</strong> bezeichnet nicht koerperliche Staerke, sondern den <strong>Fortpflanzungserfolg</strong> eines Individuums - also wie viele <strong>ueberlebens- und fortpflanzungsfaehige Nachkommen</strong> es in die naechste Generation bringt. Verhalten, das die Fitness maximiert, wird durch <strong>natuerliche Selektion</strong> beguenstigt.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. ANGEBORENES VERHALTEN ==================== -->
+<section class="topic" id="angeboren">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--danger-light); color: var(--danger);">&#129504;</div>
+    <div>
+      <h2>Angeborenes Verhalten</h2>
+      <div class="subtitle">Reflex &amp; Erbkoordination - genetisch festgelegte Verhaltensweisen</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      <strong>Angeborenes Verhalten</strong> ist genetisch festgelegt, bei allen Individuen einer Art gleich und muss <strong>nicht erlernt</strong> werden. Es wird unterteilt in <span class="highlight">Reflexe</span> und <span class="highlight">Erbkoordinationen</span>.
+    </p>
+
+    <div class="schema">
+      <div class="schema-card" style="border-color: #f87171;">
+        <div class="icon">&#9889;</div>
+        <h4>Reflex</h4>
+        <p><strong>Einfachste Form</strong> angeborenen Verhaltens. Unwillkuerlich, schnell, stereotyp. Laeuft ueber den <strong>Reflexbogen</strong>: Rezeptor &#8594; sensorisches Neuron &#8594; Verarbeitungszentrum &#8594; motorisches Neuron &#8594; Effektor</p>
+      </div>
+      <div class="schema-card" style="border-color: #a78bfa;">
+        <div class="icon">&#128260;</div>
+        <h4>Erbkoordination (FAP)</h4>
+        <p><strong>Komplexere, artspezifische</strong> Bewegungsfolge. Wird durch Schluesselreiz ausgeloest, laeuft dann <strong>vollstaendig</strong> ab (auch wenn Reiz entfernt wird). Gesteuert durch <strong>zentrales Nervensystem</strong>.</p>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Schema: Reflex vs. Erbkoordination</div>
+      <table class="compare-table">
+        <tr>
+          <th>Merkmal</th>
+          <th>&#9889; Reflex</th>
+          <th>&#128260; Erbkoordination</th>
+        </tr>
+        <tr>
+          <td><strong>Komplexitaet</strong></td>
+          <td>Einfach, einzelne Reaktion</td>
+          <td>Komplex, Bewegungssequenz</td>
+        </tr>
+        <tr>
+          <td><strong>Steuerung</strong></td>
+          <td>Reflexbogen (Rueckenmark)</td>
+          <td>Zentrales Nervensystem (Gehirn)</td>
+        </tr>
+        <tr>
+          <td><strong>Verlauf</strong></td>
+          <td>Reiz-Reaktion (direkt)</td>
+          <td>Wird durch Schluesselreiz <strong>ausgeloest</strong>, laeuft dann vollstaendig ab</td>
+        </tr>
+        <tr>
+          <td><strong>Abbruch moeglich?</strong></td>
+          <td>Ja (wenn Reiz weg)</td>
+          <td>Nein - laeuft komplett durch (&#8220;Leerlaufhandlung&#8221; moeglich)</td>
+        </tr>
+        <tr>
+          <td><strong>Beispiel</strong></td>
+          <td>Kniesehnenreflex, Pupillenreflex</td>
+          <td>Eirollbewegung der Graugans, Balztanz</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="example">
+      <strong>Eirollbewegung der Graugans (Lorenz &amp; Tinbergen):</strong> Wenn ein Ei aus dem Nest rollt, schiebt die Gans es mit dem Schnabel zurueck. Wird das Ei waehrend der Bewegung entfernt, fuehrt sie die Bewegung trotzdem zu Ende = Beweis fuer eine Erbkoordination!
+    </div>
+
+    <div class="terms">
+      <span class="term">Reflex</span>
+      <span class="term purple">Erbkoordination</span>
+      <span class="term green">Reflexbogen</span>
+      <span class="term orange">Leerlaufhandlung</span>
+      <span class="term">Artspezifisch</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Warum ist die Eirollbewegung der Graugans eine Erbkoordination und kein Reflex?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Weil sie eine <strong>komplexe Bewegungssequenz</strong> ist, die nach dem Ausloesen <strong>vollstaendig ablaeuft</strong>, auch wenn der ausloesende Reiz (das Ei) entfernt wird. Ein Reflex wuerde sofort aufhoeren, wenn der Reiz verschwindet. Ausserdem ist sie <strong>artspezifisch</strong> und wird ueber das ZNS gesteuert, nicht ueber einen einfachen Reflexbogen.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist eine Leerlaufhandlung?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Eine Erbkoordination, die <strong>ohne den adaequaten Schluesselreiz</strong> auftritt - meist bei sehr hoher innerer Handlungsbereitschaft. Das Tier fuehrt die Verhaltenssequenz "ins Leere" aus, z.B. ein Hund, der ohne Beute eine Fangbewegung macht. Dies zeigt die <strong>endogene Steuerung</strong> der Erbkoordination.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Nenne 3 Merkmale, die einen Reflex kennzeichnen.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          1. <strong>Unwillkuerlich</strong> - nicht bewusst steuerbar<br>
+          2. <strong>Schnell &amp; stereotyp</strong> - immer gleicher Ablauf, kaum variabel<br>
+          3. <strong>Einfacher Reflexbogen</strong> - Reiz &#8594; Rezeptor &#8594; afferentes Neuron &#8594; Verarbeitungszentrum &#8594; efferentes Neuron &#8594; Effektor
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. ENDOGENE FAKTOREN ==================== -->
+<section class="topic" id="endogen">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--warning-light); color: var(--warning);">&#128293;</div>
+    <div>
+      <h2>Endogene Faktoren: Handlungsbereitschaft</h2>
+      <div class="subtitle">Innere Motivation - physiologisch &amp; humoral gesteuert</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      <strong>Handlungsbereitschaft</strong> (= Motivation) beschreibt die <span class="highlight">innere Bereitschaft</span> eines Tieres, ein bestimmtes Verhalten auszufuehren. Sie wird durch <strong>physiologische</strong> und <strong>humorale</strong> Faktoren beeinflusst und schwankt ueber die Zeit.
+    </p>
+
+    <div class="schema">
+      <div class="schema-card" style="border-color: #fb923c;">
+        <div class="icon">&#129504;</div>
+        <h4>Physiologisch</h4>
+        <p>Nervensystem: Erregungszustaende, Verrechnung von Reizen im ZNS, neuronale Netzwerke, innere Uhr</p>
+      </div>
+      <div class="schema-card" style="border-color: #f472b6;">
+        <div class="icon">&#128167;</div>
+        <h4>Humoral</h4>
+        <p>Hormone im Blut: Testosteron, Oestrogen, Adrenalin, Melatonin usw. - wirken langsam, aber langanhaltend</p>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Verhaltensausloesung = Handlungsbereitschaft + Schluesselreiz</div>
+      <div class="flow">
+        <div class="flow-box" style="background: var(--warning-light); color: var(--warning);">Hohe Handlungs-<br>bereitschaft<br><small>(endogen)</small></div>
+        <span class="flow-arrow" style="font-size: 2rem;">+</span>
+        <div class="flow-box" style="background: var(--accent-light); color: var(--accent);">Schluessel-<br>reiz<br><small>(exogen)</small></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--primary-light); color: var(--primary);">Verhalten<br>wird<br>ausgeloest!</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Doppelte Schwelle:</strong> Ein Stichling mit hohem Testosteronspiegel (hohe Handlungsbereitschaft) reagiert schon auf <strong>schwache</strong> rote Reize aggressiv. Ein Stichling mit niedrigem Testosteron braucht einen <strong>starken</strong> roten Reiz. Je hoeher die Handlungsbereitschaft, desto geringer muss der Schluesselreiz sein!
+    </div>
+
+    <div class="terms">
+      <span class="term orange">Handlungsbereitschaft</span>
+      <span class="term">Motivation</span>
+      <span class="term green">Physiologisch</span>
+      <span class="term purple">Humoral (Hormone)</span>
+      <span class="term">Schwellenwert</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was passiert, wenn die Handlungsbereitschaft sehr hoch, aber kein Schluesselreiz vorhanden ist?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Es kann zu einer <strong>Leerlaufhandlung</strong> kommen - das Verhalten wird <strong>ohne adaequaten Ausloesereiz</strong> ausgefuehrt. Ausserdem kann es zu <strong>Uebersprunghandlungen</strong> kommen, bei denen ein voellig anderes Verhalten gezeigt wird (z.B. Putzen in einer Konfliktsituation). Die angestaute Motivation entlaedt sich in einem "falschen" Kanal.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Erklaere den Unterschied zwischen physiologischer und humoraler Steuerung.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Physiologisch</strong> = ueber das <strong>Nervensystem</strong>: schnelle, elektrische Signalweiterleitung, kurzfristige Wirkung.<br>
+          <strong>Humoral</strong> = ueber <strong>Hormone im Blut</strong>: langsamere, chemische Signalweiterleitung, aber <strong>laenger anhaltende</strong> Wirkung. Hormone werden von Druesen ausgeschuettet und beeinflussen z.B. Fortpflanzungsverhalten (Testosteron) oder Stressreaktionen (Adrenalin).
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5. SCHLUESSELREIZ ==================== -->
+<section class="topic" id="exogen">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--accent-light); color: var(--accent);">&#128273;</div>
+    <div>
+      <h2>Exogener Faktor: Schluesselreiz</h2>
+      <div class="subtitle">Der aeussere Ausloeser angeborenen Verhaltens - angeboren oder erworben</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      Ein <strong>Schluesselreiz</strong> ist ein <span class="highlight">spezifisches Reizmerkmal</span>, das ueber den <strong>Angeborenen Ausloesemechanismus (AAM)</strong> eine bestimmte Instinkthandlung/Erbkoordination ausloest. Er wirkt wie ein Schluessel, der ins Schloss des AAM passt.
+    </p>
+
+    <div class="diagram">
+      <div class="diagram-title">Schluessel-Schloss-Prinzip: Schluesselreiz + AAM</div>
+      <div class="flow">
+        <div class="flow-box" style="background: #fde68a; color: #92400e;">&#128273; Schluesselreiz<br><small>(spezifisches Merkmal)</small></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--primary-light); color: var(--primary);">&#128274; AAM<br><small>(Angeborener<br>Ausloesemechanismus)</small></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--accent-light); color: var(--accent);">Erbkoordination<br><small>(Verhaltensantwort)</small></div>
+      </div>
+    </div>
+
+    <table class="compare-table">
+      <tr>
+        <th>Typ</th>
+        <th>Erklaerung</th>
+        <th>Beispiel</th>
+      </tr>
+      <tr>
+        <td><strong>Angeborener Schluesselreiz</strong></td>
+        <td>Von Geburt an wirksam, genetisch festgelegt, kein Lernen noetig</td>
+        <td>Roter Bauch des Stichlings, Kindchenschema beim Menschen</td>
+      </tr>
+      <tr>
+        <td><strong>Erworbener Schluesselreiz</strong></td>
+        <td>Wird durch <strong>Lernerfahrung</strong> zum Ausloeser (AAM wird zum EAAM)</td>
+        <td>Hund lernt, auf das Geraeusch der Futterdose zu reagieren</td>
+      </tr>
+    </table>
+
+    <div class="example">
+      <strong>Kindchenschema:</strong> Grosse Augen, hohe Stirn, rundes Gesicht, kleine Nase &#8594; loest beim Menschen <strong>Pflegeverhalten</strong> aus. Funktioniert auch bei Tierbabys oder Puppen = angeborener Schluesselreiz!
+    </div>
+
+    <div class="terms">
+      <span class="term green">Schluesselreiz</span>
+      <span class="term">AAM</span>
+      <span class="term purple">EAAM</span>
+      <span class="term orange">Kindchenschema</span>
+      <span class="term">Reizfilter</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist der AAM und wie funktioniert er?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Der <strong>Angeborene Ausloesemechanismus (AAM)</strong> ist ein neuronaler Filtermechanismus, der aus der Vielzahl eingehender Reize nur den <strong>spezifischen Schluesselreiz</strong> herausfiltert und dann die entsprechende Erbkoordination ausloest. Er funktioniert nach dem <strong>Schluessel-Schloss-Prinzip</strong>: Nur der "passende" Reiz oeffnet das Verhaltensprogramm.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was unterscheidet einen angeborenen von einem erworbenen Schluesselreiz?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Angeboren:</strong> Von Geburt an wirksam, genetisch festgelegt, <strong>kein Lernen noetig</strong>. Der AAM reagiert sofort auf den Reiz (z.B. Kindchenschema).<br>
+          <strong>Erworben:</strong> Der Schluesselreiz wird durch <strong>Lernerfahrung</strong> wirksam. Der AAM wird zum <strong>EAAM</strong> (Erfahrungsbedingter Ausloesemechanismus). Beispiel: Ein Hund lernt durch Konditionierung, auf das Klingeln der Tuerglocke mit Bellen zu reagieren.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. LERNFORMEN ==================== -->
+<section class="topic" id="lernformen">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: #dbeafe; color: var(--primary);">&#128218;</div>
+    <div>
+      <h2>Lernformen - Uebersicht</h2>
+      <div class="subtitle">Klassische &amp; operante Konditionierung, Nachahmungslernen, Praegung</div>
+    </div>
+  </div>
+  <div class="topic-body">
+
+    <!-- Klassische Konditionierung -->
+    <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.15rem;">1. Klassische Konditionierung (Pawlow)</h3>
+    <p class="explain">
+      Ein <strong>neutraler Reiz</strong> (NS) wird wiederholt mit einem <strong>unbedingten Reiz</strong> (US) gekoppelt, bis der NS allein die Reaktion ausloest. Er wird dann zum <span class="highlight">bedingten Reiz (CS)</span>.
+    </p>
+    <div class="diagram">
+      <div class="diagram-title">Schema: Klassische Konditionierung (Pawlows Hund)</div>
+      <div class="process-row">
+        <div class="process-step">
+          <div class="step-num" style="background: var(--gray-500);">Vor</div>
+          <h4>Vor Konditionierung</h4>
+          <p>Glocke (NS) &#8594; keine Reaktion<br>Futter (US) &#8594; Speichelfluss (UR)</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num" style="background: var(--primary);">1</div>
+          <h4>Waehrend</h4>
+          <p>Glocke (NS) + Futter (US) &#8594; Speichelfluss (UR)<br><em>(mehrfach wiederholt)</em></p>
+        </div>
+        <div class="process-step">
+          <div class="step-num" style="background: var(--accent);">2</div>
+          <h4>Nach Konditionierung</h4>
+          <p>Glocke allein (CS) &#8594; Speichelfluss (CR)<br><strong>Gelernt!</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="terms" style="margin-bottom: 28px;">
+      <span class="term">NS (Neutraler Reiz)</span>
+      <span class="term green">US (Unbedingter Reiz)</span>
+      <span class="term purple">CS (Bedingter Reiz)</span>
+      <span class="term orange">UR / CR (Reaktion)</span>
+    </div>
+
+    <!-- Operante Konditionierung -->
+    <h3 style="color: var(--secondary); margin-bottom: 12px; font-size: 1.15rem;">2. Operante Konditionierung (Skinner)</h3>
+    <p class="explain">
+      Das Tier lernt durch die <strong>Konsequenzen</strong> seines Verhaltens. <span class="highlight">Verstaerkung</span> = Verhalten wird haeufiger, <span class="highlight">Bestrafung</span> = Verhalten wird seltener.
+    </p>
+
+    <table class="compare-table">
+      <tr>
+        <th></th>
+        <th>&#10133; Positiv (hinzufuegen)</th>
+        <th>&#10134; Negativ (entfernen)</th>
+      </tr>
+      <tr>
+        <td><strong>Verstaerkung</strong><br><small>(&#8593; Verhalten)</small></td>
+        <td><strong>Positive Verstaerkung</strong><br>Angenehmer Reiz wird hinzugefuegt<br><em>&#8594; Leckerli fuer Trick</em></td>
+        <td><strong>Negative Verstaerkung</strong><br>Unangenehmer Reiz wird entfernt<br><em>&#8594; Piepen hoert auf beim Anschnallen</em></td>
+      </tr>
+      <tr>
+        <td><strong>Bestrafung</strong><br><small>(&#8595; Verhalten)</small></td>
+        <td><strong>Positive Bestrafung</strong><br>Unangenehmer Reiz wird hinzugefuegt<br><em>&#8594; Wasserspritze bei unerwuenschtem Verhalten</em></td>
+        <td><strong>Negative Bestrafung</strong><br>Angenehmer Reiz wird entfernt<br><em>&#8594; Spielzeug wird weggenommen</em></td>
+      </tr>
+    </table>
+
+    <div class="example">
+      <strong>Lerndisposition:</strong> Nicht jede Art kann alles gleich gut lernen. Tiere haben eine <strong>genetisch bedingte Bereitschaft</strong>, bestimmte Reize leichter miteinander zu verknuepfen als andere. Z.B. lernen Ratten schnell, Uebelkeit mit Geschmack zu verbinden (biologisch sinnvoll), aber nicht mit einem Geraeusch.
+    </div>
+
+    <!-- Nachahmungslernen -->
+    <h3 style="color: var(--accent); margin-bottom: 12px; margin-top: 28px; font-size: 1.15rem;">3. Nachahmungslernen (Bandura)</h3>
+    <p class="explain">
+      Lernen durch <strong>Beobachtung und Imitation</strong> eines Vorbilds (Modells). Das beobachtende Tier muss die Handlung <strong>nicht selbst ausprobieren</strong>, sondern lernt durch Zuschauen. Besonders wichtig bei sozialen Tieren und Menschen.
+    </p>
+    <div class="example">
+      <strong>Meisen in England:</strong> Einige Meisen lernten, Milchflaschen-Deckel zu oeffnen. Dieses Verhalten breitete sich schnell aus, da andere Meisen es <strong>beobachteten und nachahmten</strong>. = Kulturelle Tradierung durch Nachahmungslernen.
+    </div>
+
+    <!-- Praegung -->
+    <h3 style="color: var(--danger); margin-bottom: 12px; margin-top: 28px; font-size: 1.15rem;">4. Praegung - Nachfolgepraegung (Lorenz)</h3>
+    <p class="explain">
+      Ein <strong>irreversibler Lernvorgang</strong> in einer <span class="highlight">sensiblen Phase</span> kurz nach der Geburt. Das Jungtier fixiert sich auf das erste sich bewegende Objekt und folgt ihm. Einmal gepraeagt = <strong>nicht mehr rueckgaengig</strong> zu machen!
+    </p>
+
+    <div class="schema">
+      <div class="schema-card" style="border-color: #ef4444;">
+        <div class="icon">&#128037;</div>
+        <h4>Sensible Phase</h4>
+        <p>Kurzes Zeitfenster nach der Geburt/dem Schluepfen, in dem Praegung stattfinden kann</p>
+      </div>
+      <div class="schema-card" style="border-color: #ef4444;">
+        <div class="icon">&#128274;</div>
+        <h4>Irreversibel</h4>
+        <p>Nicht umkehrbar - das gepraegte Objekt bleibt dauerhaft Bezugspunkt</p>
+      </div>
+      <div class="schema-card" style="border-color: #ef4444;">
+        <div class="icon">&#128694;</div>
+        <h4>Nachfolgereaktion</h4>
+        <p>Jungtier folgt dem gepraegten Objekt - normalerweise die Mutter</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Lorenz und die Graugaense:</strong> Konrad Lorenz war das erste bewegende Objekt, das die frisch geschluepften Gaense sahen. Sie wurden auf ihn <strong>gepraeagt</strong> und folgten ihm statt ihrer Mutter - auch noch als erwachsene Tiere!
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist der Unterschied zwischen klassischer und operanter Konditionierung?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Klassische Konditionierung:</strong> Ein <strong>neutraler Reiz</strong> wird durch Kopplung mit einem unbedingten Reiz zum <strong>bedingten Reiz</strong>. Das Tier lernt eine <strong>Verknuepfung zwischen zwei Reizen</strong> (Stimulus-Stimulus). Es reagiert <strong>passiv/reflexartig</strong>.<br><br>
+          <strong>Operante Konditionierung:</strong> Das Tier lernt durch die <strong>Konsequenzen seines eigenen Verhaltens</strong>. Es ist <strong>aktiv</strong> beteiligt und aendert sein Verhalten aufgrund von Verstaerkung oder Bestrafung (Stimulus-Reaktion-Konsequenz).
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was bedeutet "Lerndisposition"?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Lerndisposition</strong> ist die <strong>genetisch festgelegte Bereitschaft</strong>, bestimmte Reiz-Reaktions-Verknuepfungen <strong>leichter zu lernen</strong> als andere. Sie ist <strong>artspezifisch</strong> und biologisch sinnvoll: Ratten verknuepfen Geschmack leicht mit Uebelkeit (hilft beim Vermeiden von Gift), aber nicht Licht mit Uebelkeit. Zeigt, dass Lernen nicht voellig frei, sondern durch Evolution <strong>vorstrukturiert</strong> ist.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Nenne 3 Merkmale der Praegung, die sie von anderem Lernen unterscheiden.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          1. <strong>Sensible Phase</strong> - funktioniert nur in einem bestimmten, kurzen Zeitfenster nach der Geburt<br>
+          2. <strong>Irreversibilitaet</strong> - einmal gepraeagt, nicht mehr umkehrbar (anders als Konditionierung, die geloescht werden kann)<br>
+          3. <strong>Keine Verstaerkung noetig</strong> - es braucht keine Belohnung oder Bestrafung; die blosse Anwesenheit des Objekts genuegt
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was ist der Unterschied zwischen positiver und negativer Verstaerkung?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Beides <strong>erhoeht</strong> die Haeufigkeit des Verhaltens!<br>
+          <strong>Positive Verstaerkung:</strong> Ein <strong>angenehmer Reiz wird hinzugefuegt</strong> (z.B. Leckerli nach einem Trick).<br>
+          <strong>Negative Verstaerkung:</strong> Ein <strong>unangenehmer Reiz wird entfernt</strong> (z.B. das nervige Piepen im Auto hoert auf, wenn man sich anschnallt).<br>
+          Merke: "Positiv" und "negativ" bedeuten hier <strong>nicht</strong> gut/schlecht, sondern hinzufuegen/entfernen!
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7. VERHALTENSOEKOLOGIE ==================== -->
+<section class="topic" id="oekologie">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--accent-light); color: var(--accent);">&#127793;</div>
+    <div>
+      <h2>Verhaltensoekologie</h2>
+      <div class="subtitle">Angepasstheit von Verhalten - Kosten-Nutzen-Bilanz</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      Die <strong>Verhaltensoekologie</strong> untersucht, wie Verhalten an <span class="highlight">oekologische Bedingungen angepasst</span> ist. Grundidee: Jedes Verhalten hat <strong>Kosten und Nutzen</strong>. Die natuerliche Selektion beguenstigt Verhalten, bei dem der <strong>Nutzen die Kosten ueberwiegt</strong>.
+    </p>
+
+    <div class="cost-benefit">
+      <div class="cost-col">
+        <h4>&#10060; Kosten des Verhaltens</h4>
+        <ul>
+          <li><strong>Energiekosten</strong> - Kalorienverbrauch</li>
+          <li><strong>Zeitkosten</strong> - Zeit fuer anderes fehlt</li>
+          <li><strong>Risiko</strong> - Fressfeinde, Verletzungen</li>
+          <li><strong>Opportunitaetskosten</strong> - entgangene Alternativen</li>
+        </ul>
+      </div>
+      <div class="benefit-col">
+        <h4>&#9989; Nutzen des Verhaltens</h4>
+        <ul>
+          <li><strong>Nahrungserwerb</strong> - Energie gewinnen</li>
+          <li><strong>Paarungserfolg</strong> - Fortpflanzung</li>
+          <li><strong>Schutz</strong> - Ueberleben sichern</li>
+          <li><strong>Territorium</strong> - Ressourcen sichern</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Prinzip: Optimales Verhalten durch Kosten-Nutzen-Abwaegung</div>
+      <div class="flow">
+        <div class="flow-box" style="background: var(--danger-light); color: var(--danger);">Kosten<br><small>Energie, Zeit, Risiko</small></div>
+        <span class="flow-arrow" style="font-size: 2rem;">&#8596;</span>
+        <div class="flow-box" style="background: var(--accent-light); color: var(--accent);">Nutzen<br><small>Fitness, Ressourcen</small></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--primary-light); color: var(--primary);">Optimales<br>Verhalten<br><small>Selektion beguenstigt</small></div>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Optimale Nahrungssuche (Optimal Foraging):</strong> Ein Vogel entscheidet, ob er an einer Futterstelle bleibt oder zu einer neuen fliegt. Er bleibt, solange der <strong>Energiegewinn pro Zeiteinheit</strong> ueber dem Durchschnitt liegt. Sinkt der Ertrag, wechselt er &#8594; <strong>Marginal Value Theorem</strong>.
+    </div>
+
+    <div class="terms">
+      <span class="term green">Verhaltensoekologie</span>
+      <span class="term">Kosten-Nutzen-Bilanz</span>
+      <span class="term orange">Optimal Foraging</span>
+      <span class="term purple">Angepasstheit</span>
+      <span class="term">Fitnessmaximierung</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Warum zeigen Maennchen oft auffaelliges Balzverhalten, obwohl es riskant ist?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Aus der <strong>Kosten-Nutzen-Perspektive</strong> ueberwiegt der <strong>Nutzen</strong> (Paarungserfolg, Weitergabe der Gene) die <strong>Kosten</strong> (Energie, erhoehtes Fressfeindrisiko). Auffaelliges Balzverhalten signalisiert dem Weibchen <strong>gute Gene</strong> ("Wenn er trotz Auffaelligkeit ueberlebt hat, muss er fit sein" = <strong>Handicap-Prinzip</strong>). Die natuerliche Selektion hat dieses Verhalten beguenstigt, weil es die <strong>Fitness maximiert</strong>.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Erklaere das Prinzip der optimalen Nahrungssuche an einem Beispiel.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Ein <strong>Eichhoernchen</strong> sammelt Nuesse. Kleine Nuesse haben wenig Energiegehalt, grosse Nuesse viel, aber sie brauchen laenger zum Knacken. Das Eichhoernchen waehlt die <strong>Nussgroesse mit dem besten Verhaeltnis von Energiegewinn zu Zeitaufwand</strong>. Es maximiert die <strong>Netto-Energieaufnahme pro Zeiteinheit</strong>. Wenn ein Baum immer weniger Nuesse hat, lohnt sich der Wechsel zu einem neuen Baum, wenn die erwartete Ausbeute dort hoeher ist.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8. SOZIOBIOLOGIE (LK) ==================== -->
+<section class="topic" id="soziobiologie">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--secondary-light); color: var(--secondary);">&#128106;</div>
+    <div>
+      <h2>Soziobiologie <span class="lk-badge">LK</span></h2>
+      <div class="subtitle">Evolutionsbiologische Funktion sozialen Verhaltens - Elterliche Investition</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      Die <strong>Soziobiologie</strong> erklaert soziales Verhalten als Ergebnis der <span class="highlight">natuerlichen Selektion</span>. Kernfrage: Wie maximieren Individuen ihre <strong>Fitness</strong> durch soziale Interaktionen? Das Konzept der <strong>elterlichen Investition</strong> (Trivers, 1972) ist dabei zentral.
+    </p>
+
+    <h3 style="color: var(--secondary); margin: 20px 0 12px; font-size: 1.05rem;">Elterliche Investition (Parental Investment)</h3>
+    <p class="explain">
+      = Jeder <strong>Aufwand</strong> eines Elternteils fuer einen Nachkommen, der die <strong>Ueberlebenschancen dieses Nachkommen erhoehnt</strong>, aber gleichzeitig die Faehigkeit des Elternteils verringert, in <strong>andere Nachkommen zu investieren</strong>.
+    </p>
+
+    <div class="tinbergen-grid">
+      <div class="tinbergen-box" style="background: #fce7f3; border-color: #f9a8d4;">
+        <h4 style="color: #be185d;">&#9792; Weibliche Strategie</h4>
+        <ul>
+          <li><strong>Hohe Investition</strong>: Eizellen sind gross, energiereich, begrenzt</li>
+          <li>Oft: Schwangerschaft, Brutpflege, Saeugen</li>
+          <li>&#8594; <strong>Waehlerisch</strong> bei Partnerwahl</li>
+          <li>&#8594; Qualitaet der Nachkommen maximieren</li>
+        </ul>
+      </div>
+      <div class="tinbergen-box" style="background: #dbeafe; border-color: #93c5fd;">
+        <h4 style="color: #1d4ed8;">&#9794; Maennliche Strategie</h4>
+        <ul>
+          <li><strong>Geringere Investition</strong>: Spermien sind klein, zahlreich, billig</li>
+          <li>Oft: weniger Brutpflege</li>
+          <li>&#8594; <strong>Konkurrenz</strong> um Weibchen</li>
+          <li>&#8594; Quantitaet der Paarungen maximieren</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Folgen unterschiedlicher elterlicher Investition</div>
+      <div class="flow">
+        <div class="flow-box" style="background: #fce7f3; color: #be185d;">Weibchen<br>investiert mehr</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--warning-light); color: var(--warning);">Weibchen<br>waehlt aus</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: #dbeafe; color: #1d4ed8;">Maennchen<br>konkurrieren</div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-box" style="background: var(--secondary-light); color: var(--secondary);">Sexuelle<br>Selektion</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Umkehrfall - Seepferdchen:</strong> Beim Seepferdchen traegt das <strong>Maennchen</strong> die Jungen in einer Bruttasche aus &#8594; es investiert mehr als das Weibchen. Folge: <strong>Weibchen konkurrieren, Maennchen waehlen</strong> - genau umgekehrt! Bestaetigt Trivers' Theorie.
+    </div>
+
+    <div class="terms">
+      <span class="term purple">Soziobiologie</span>
+      <span class="term">Elterliche Investition</span>
+      <span class="term green">Sexuelle Selektion</span>
+      <span class="term orange">Intersexuelle Selektion</span>
+      <span class="term">Intrasexuelle Selektion</span>
+      <span class="term purple">Fitness</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Warum sind bei den meisten Arten die Weibchen waehlerischer?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Weil Weibchen eine <strong>hoehere elterliche Investition</strong> haben: Eizellen sind energiereich und begrenzt, dazu kommen oft Tragzeit, Geburt und Aufzucht. Ein "falscher" Partner kostet das Weibchen <strong>viel mehr</strong> als das Maennchen. Deshalb lohnt es sich fuer Weibchen, <strong>sorgfaeltig auszuwaehlen</strong> (= <strong>intersexuelle Selektion</strong>), waehrend Maennchen um den Zugang zu Weibchen <strong>konkurrieren</strong> (= <strong>intrasexuelle Selektion</strong>).
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Wie laesst sich altruistisches Verhalten soziobiologisch erklaeren?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          Durch die <strong>Verwandtenselektion (Kin Selection)</strong> nach Hamilton: Ein Individuum kann seine <strong>inklusive Fitness</strong> erhoehen, indem es Verwandten hilft, da diese einen Teil seiner Gene tragen. <strong>Hamiltons Regel: rB > C</strong> (Verwandtschaftsgrad x Nutzen fuer Empfaenger > Kosten fuer Helfer). Beispiel: Erdmaennchen-Waechter riskieren ihr Leben fuer die Gruppe, weil die meisten Gruppenmitglieder <strong>nah verwandt</strong> sind.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 9. KOGNITION & WERKZEUGGEBRAUCH (LK) ==================== -->
+<section class="topic" id="kognition">
+  <div class="topic-header">
+    <div class="topic-icon" style="background: var(--secondary-light); color: var(--secondary);">&#129520;</div>
+    <div>
+      <h2>Komplexe Lernformen: Kognition &amp; Werkzeuggebrauch <span class="lk-badge">LK</span></h2>
+      <div class="subtitle">Einsichtiges Lernen und zielgerichteter Werkzeuggebrauch</div>
+    </div>
+  </div>
+  <div class="topic-body">
+    <p class="explain">
+      <strong>Kognition</strong> umfasst hoehere geistige Prozesse wie <span class="highlight">Einsicht, Planung, mentale Repraesentationen</span> und <strong>Problemloesen</strong>. Werkzeuggebrauch ist ein besonders eindrucksvolles Beispiel kognitiver Faehigkeiten bei Tieren.
+    </p>
+
+    <div class="schema">
+      <div class="schema-card" style="border-color: #8b5cf6;">
+        <div class="icon">&#128161;</div>
+        <h4>Einsichtiges Lernen</h4>
+        <p>Problemloesung <strong>ohne Versuch-und-Irrtum</strong>. Das Tier "versteht" die Zusammenhaenge und findet eine <strong>ploetzliche Loesung</strong> (Aha-Erlebnis / Koehlers Schimpansen)</p>
+      </div>
+      <div class="schema-card" style="border-color: #8b5cf6;">
+        <div class="icon">&#129520;</div>
+        <h4>Werkzeuggebrauch</h4>
+        <p>Gezielter Einsatz von <strong>Gegenstaenden als Hilfsmittel</strong>, um ein Problem zu loesen. Zeigt <strong>Vorausplanung</strong> und Verstaendnis von Ursache-Wirkung</p>
+      </div>
+      <div class="schema-card" style="border-color: #8b5cf6;">
+        <div class="icon">&#128257;</div>
+        <h4>Werkzeugherstellung</h4>
+        <p>Noch komplexer: Objekte werden <strong>modifiziert oder hergestellt</strong>, um sie als Werkzeug zu nutzen. Erfordert <strong>mentale Planung</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <strong>Koehlers Schimpanse Sultan:</strong> Bananen haengen ausser Reichweite. Sultan probiert nicht zufaellig herum, sondern <strong>betrachtet die Situation</strong>, <strong>stapelt dann gezielt Kisten</strong> aufeinander und erreicht die Bananen. &#8594; <strong>Einsichtiges Lernen</strong> = Loesung durch mentale Problemanalyse.
+    </div>
+    <div class="example">
+      <strong>Neukaledonische Kraehen:</strong> Biegen spontan einen Draht zu einem <strong>Haken</strong>, um Futter aus einem Rohr zu angeln. Sie haben den Haken <strong>vorher nie gesehen</strong> und stellen ihn <strong>selbst her</strong>. &#8594; Zeigt <strong>Werkzeugherstellung, Vorausplanung und kausales Denken</strong>.
+    </div>
+    <div class="example">
+      <strong>Schimpansen:</strong> Verwenden duenne Zweige als <strong>"Angeln"</strong> fuer Termiten. Sie <strong>entblaettern</strong> die Zweige vorher gezielt = Werkzeugherstellung. Dieses Wissen wird durch <strong>Nachahmungslernen</strong> an die naechste Generation weitergegeben = kulturelle Tradierung.
+    </div>
+
+    <div class="terms">
+      <span class="term purple">Kognition</span>
+      <span class="term">Einsichtiges Lernen</span>
+      <span class="term green">Werkzeuggebrauch</span>
+      <span class="term orange">Werkzeugherstellung</span>
+      <span class="term">Mentale Repraesentation</span>
+      <span class="term purple">Theory of Mind</span>
+    </div>
+
+    <div class="qa-section">
+      <h3>&#x2753; Pruefe dein Wissen</h3>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Was unterscheidet einsichtiges Lernen von Versuch-und-Irrtum-Lernen?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Versuch und Irrtum</strong> (= operante Konditionierung): Das Tier probiert <strong>zufaellig</strong> verschiedene Verhaltensweisen aus und lernt durch Erfolg/Misserfolg. Langsam, schrittweise.<br><br>
+          <strong>Einsichtiges Lernen:</strong> Das Tier analysiert die Situation <strong>mental</strong>, erkennt Zusammenhaenge und findet eine <strong>ploetzliche, zielgerichtete Loesung</strong> - ohne vorheriges Ausprobieren. Erkennbar am <strong>"Aha-Effekt"</strong>: Die Loesung erscheint ploetzlich und ist sofort korrekt. Erfordert <strong>kognitive Faehigkeiten</strong> und die Faehigkeit zur <strong>mentalen Repraesentation</strong>.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Warum gilt Werkzeugherstellung als hoehere kognitive Leistung als Werkzeuggebrauch?</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Werkzeuggebrauch:</strong> Ein vorhandenes Objekt wird als Hilfsmittel <strong>verwendet</strong> - erfordert das Erkennen der Nuetzlichkeit.<br>
+          <strong>Werkzeugherstellung:</strong> Ein Objekt wird <strong>gezielt veraendert oder neu geschaffen</strong>, um es als Werkzeug zu nutzen. Dies erfordert:<br>
+          1. <strong>Vorausplanung</strong> - "Welches Werkzeug brauche ich?"<br>
+          2. <strong>Kausales Denken</strong> - "Wie muss es aussehen, damit es funktioniert?"<br>
+          3. <strong>Mentale Repraesentation</strong> - das fertige Werkzeug wird vor dem Bau "im Kopf" vorgestellt<br>
+          Dies zeigt ein <strong>Verstaendnis von Ursache und Wirkung</strong> und die Faehigkeit, in die <strong>Zukunft zu planen</strong>.
+        </div></div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-question">
+          <span style="display:flex;align-items:center;gap:10px;"><span class="q-icon">F</span> Nenne ein Beispiel fuer kulturelle Tradierung von Werkzeuggebrauch bei Tieren.</span>
+          <span class="toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer"><div class="qa-answer-inner">
+          <strong>Schimpansen und Termitenangeln:</strong> Erfahrene Schimpansen benutzen entblaetterte Zweige als Werkzeuge, um Termiten aus ihren Bauten zu "angeln". Junge Schimpansen <strong>beobachten und imitieren</strong> dieses Verhalten (= Nachahmungslernen). Verschiedene Schimpansenpopulationen verwenden <strong>unterschiedliche Techniken</strong> - was zeigt, dass es sich um <strong>kulturell tradiertes Verhalten</strong> handelt, nicht um angeborenes. Die Technik wird von Generation zu Generation <strong>sozial weitergegeben</strong>.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- JavaScript for Q&A interactivity -->
+<script>
+  document.querySelectorAll('.qa-card').forEach(card => {
+    card.querySelector('.qa-question').addEventListener('click', () => {
+      // Close other cards in same section
+      const section = card.closest('.qa-section');
+      section.querySelectorAll('.qa-card.open').forEach(other => {
+        if (other !== card) other.classList.remove('open');
+      });
+      card.classList.toggle('open');
+    });
+  });
+
+  // Smooth scroll for nav
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
